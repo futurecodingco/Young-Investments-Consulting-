@@ -4,10 +4,51 @@ import path from 'path';
 import fs from 'fs';
 import { defineConfig, Plugin } from 'vite';
 
-function ceoPhotoUploadPlugin(): Plugin {
+function imageProxyPlugin(): Plugin {
   return {
-    name: 'ceo-photo-upload-plugin',
+    name: 'image-proxy-plugin',
     configureServer(server) {
+      // Netlify function emulator in local Vite dev server
+      server.middlewares.use('/.netlify/functions/proxy-image', async (req, res) => {
+        try {
+          const host = req.headers.host || 'localhost:3000';
+          const fullUrl = new URL(req.url || '', `http://${host}`);
+          const targetUrl = fullUrl.searchParams.get('url');
+
+          if (!targetUrl) {
+            res.statusCode = 400;
+            res.end('Missing url parameter');
+            return;
+          }
+
+          const decoded = decodeURIComponent(targetUrl);
+          const upstream = await fetch(decoded, {
+            headers: {
+              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+              'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
+            }
+          });
+
+          if (!upstream.ok) {
+            res.statusCode = upstream.status;
+            res.end(`Upstream returned ${upstream.status}`);
+            return;
+          }
+
+          const contentType = upstream.headers.get('content-type') || 'image/jpeg';
+          res.setHeader('Content-Type', contentType);
+          res.setHeader('Access-Control-Allow-Origin', '*');
+          res.setHeader('Cache-Control', 'public, max-age=86400');
+
+          const arrayBuffer = await upstream.arrayBuffer();
+          res.end(Buffer.from(arrayBuffer));
+        } catch (err: any) {
+          res.statusCode = 500;
+          res.end(`Proxy error: ${err.message}`);
+        }
+      });
+
+      // Photo upload endpoint
       server.middlewares.use('/api/upload-ceo-photo', (req, res) => {
         if (req.method === 'POST') {
           let body = '';
@@ -52,7 +93,7 @@ function ceoPhotoUploadPlugin(): Plugin {
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss(), ceoPhotoUploadPlugin()],
+    plugins: [react(), tailwindcss(), imageProxyPlugin()],
     resolve: {
       alias: {
         '@': path.resolve(import.meta.dirname || '.', '.'),
@@ -60,9 +101,7 @@ export default defineConfig(() => {
     },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
     },
   };

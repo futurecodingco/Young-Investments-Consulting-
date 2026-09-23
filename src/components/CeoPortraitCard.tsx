@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { ShieldCheck, Upload, AlertCircle } from 'lucide-react';
+import { getProxiedImageUrl } from '../utils/imageProxy';
 
 // Automatically detect any CEO image in src/assets/images/
 const imageModules = import.meta.glob<{ default: string }>(
@@ -76,7 +77,7 @@ export const CeoPortraitCard: React.FC<CeoPortraitCardProps> = ({
           <>
             {/* The Authentic Photograph of Leslie Flint Young */}
             <img
-              src={photoSrc}
+              src={getProxiedImageUrl(photoSrc)}
               alt="Leslie Flint Young - Chief Executive Officer & Founder, Young Investments Consulting Holdings"
               className="w-full h-full object-cover object-center"
               loading="eager"
