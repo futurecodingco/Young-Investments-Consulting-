@@ -74,7 +74,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* CEO Portrait Column with Instant Authentic Photo Support */}
             <div className="lg:col-span-5 flex flex-col items-center">
-              <CeoPortraitCard aspectRatioClass="aspect-[3/4]" maxWidthClass="max-w-md" />
+              <CeoPortraitCard aspectRatioClass="aspect-square" maxWidthClass="max-w-md" />
 
               {/* Direct Reach Pill */}
               <div className="w-full max-w-md mt-4 p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs space-y-2.5">
