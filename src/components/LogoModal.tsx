@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Logo } from './Logo';
-import { X, Download, Copy, Check, ShieldCheck, Palette, FileText } from 'lucide-react';
+import { X, Download, Copy, Check, ShieldCheck, Palette, FileText, Image as ImageIcon } from 'lucide-react';
+import brandEmblemJpg from '../assets/images/young_investments_logo_1790066155449.jpg';
 
 interface LogoModalProps {
   isOpen: boolean;
@@ -88,6 +89,16 @@ export const LogoModal: React.FC<LogoModalProps> = ({ isOpen, onClose }) => {
               <Download className="w-4 h-4" />
               Download Official Vector Logo (.SVG)
             </button>
+
+            <a
+              id="download-raster-crest-btn"
+              href={brandEmblemJpg}
+              download="Young_Investments_Consulting_Holdings_Crest.jpg"
+              className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-[#c5a059]/40 hover:border-[#c5a059] font-semibold text-xs rounded-lg shadow transition-all cursor-pointer"
+            >
+              <ImageIcon className="w-4 h-4 text-[#c5a059]" />
+              Download High-Res Crest (.JPG)
+            </a>
           </div>
         </div>
 

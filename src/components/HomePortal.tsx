@@ -24,7 +24,7 @@ import {
   Activity,
   ExternalLink
 } from 'lucide-react';
-import ceoPortrait from '../assets/images/leslie_young_ceo_portrait_1790071601748.jpg';
+import africanInfrastructure from '../assets/images/african_infrastructure_1790066130818.jpg';
 import { InvestmentInsightsSection } from './InvestmentInsightsSection';
 import { CeoPortraitCard } from './CeoPortraitCard';
 
@@ -239,7 +239,25 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
               <div className="relative rounded-2xl bg-gradient-to-b from-[#111927] to-[#0a101b] border border-[#c5a059]/30 p-6 shadow-2xl overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-[#c5a059]/10 rounded-full blur-2xl pointer-events-none" />
 
-                <div className="flex items-center justify-between pb-4 border-b border-slate-800">
+                {/* Pan-African Infrastructure Thumbnail */}
+                <div className="relative w-full h-32 rounded-xl overflow-hidden border border-[#c5a059]/20 mb-4 group/img">
+                  <img
+                    src={africanInfrastructure}
+                    alt="African industrial trade corridors and deepwater logistics hubs"
+                    className="w-full h-full object-cover group-hover/img:scale-105 transition-transform duration-500"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a101b] via-transparent to-black/30" />
+                  <div className="absolute bottom-2 left-2.5 right-2.5 flex items-center justify-between text-[10px] font-mono text-[#c5a059]">
+                    <span className="flex items-center gap-1">
+                      <Globe2 className="w-3 h-3" />
+                      Pan-African Logistics Grid
+                    </span>
+                    <span className="text-slate-300">SADC Corridors</span>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between pb-3 border-b border-slate-800">
                   <div className="flex items-center gap-2">
                     <ShieldCheck className="w-5 h-5 text-[#c5a059]" />
                     <span className="text-xs font-semibold uppercase tracking-wider text-slate-200">
