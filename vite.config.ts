@@ -8,8 +8,7 @@ function imageProxyPlugin(): Plugin {
   return {
     name: 'image-proxy-plugin',
     configureServer(server) {
-      // Netlify function emulator in local Vite dev server
-      server.middlewares.use('/.netlify/functions/proxy-image', async (req, res) => {
+      const handleProxy = async (req: any, res: any) => {
         try {
           const host = req.headers.host || 'localhost:3000';
           const fullUrl = new URL(req.url || '', `http://${host}`);
@@ -24,9 +23,10 @@ function imageProxyPlugin(): Plugin {
           const decoded = decodeURIComponent(targetUrl);
           const upstream = await fetch(decoded, {
             headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-              'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
-            }
+              'User-Agent':
+                'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+              Accept: 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8',
+            },
           });
 
           if (!upstream.ok) {
@@ -46,7 +46,11 @@ function imageProxyPlugin(): Plugin {
           res.statusCode = 500;
           res.end(`Proxy error: ${err.message}`);
         }
-      });
+      };
+
+      // Vercel & Netlify proxy routes in local dev
+      server.middlewares.use('/api/proxy-image', handleProxy);
+      server.middlewares.use('/.netlify/functions/proxy-image', handleProxy);
 
       // Photo upload endpoint
       server.middlewares.use('/api/upload-ceo-photo', (req, res) => {
@@ -65,7 +69,7 @@ function imageProxyPlugin(): Plugin {
                   path.resolve('src/assets/images/Mr CEO.jpg'),
                   path.resolve('src/assets/images/mr_ceo.jpg'),
                   path.resolve('public/Mr CEO.jpg'),
-                  path.resolve('public/mr_ceo.jpg')
+                  path.resolve('public/mr_ceo.jpg'),
                 ];
                 targets.forEach(target => {
                   const dir = path.dirname(target);
@@ -87,7 +91,7 @@ function imageProxyPlugin(): Plugin {
         res.statusCode = 405;
         res.end();
       });
-    }
+    },
   };
 }
 

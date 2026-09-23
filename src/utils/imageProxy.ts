@@ -1,6 +1,7 @@
 /**
  * Helper to wrap any external image URL (e.g. kommodo.ai or third-party host)
  * through the server-side proxy to prevent 403 Forbidden cross-origin blocks.
+ * Works seamlessly across Vercel (/api/proxy-image) and Netlify (/.netlify/functions/proxy-image).
  */
 export function getProxiedImageUrl(url: string | null | undefined): string {
   if (!url) return '';
@@ -10,11 +11,11 @@ export function getProxiedImageUrl(url: string | null | undefined): string {
     return url;
   }
 
-  // If it's already going through the proxy, return as-is
-  if (url.includes('/.netlify/functions/proxy-image?url=')) {
+  // If it's already going through a proxy, return as-is
+  if (url.includes('/api/proxy-image?url=') || url.includes('/.netlify/functions/proxy-image?url=')) {
     return url;
   }
 
-  // Route through Netlify Function / server proxy
-  return `/.netlify/functions/proxy-image?url=${encodeURIComponent(url)}`;
+  // Route through proxy URL
+  return `/api/proxy-image?url=${encodeURIComponent(url)}`;
 }
