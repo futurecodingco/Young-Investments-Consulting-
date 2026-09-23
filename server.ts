@@ -9,7 +9,35 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
-app.use(express.json());
+app.use(express.json({ limit: '25mb' }));
+
+app.post('/api/upload-ceo-photo', (req, res) => {
+  try {
+    const { image } = req.body;
+    if (!image) {
+      return res.status(400).json({ error: 'No image provided' });
+    }
+    const base64Data = image.replace(/^data:image\/\w+;base64,/, '');
+    const buffer = Buffer.from(base64Data, 'base64');
+    const targets = [
+      path.join(__dirname, 'src/assets/images/Mr CEO.jpg'),
+      path.join(__dirname, 'src/assets/images/mr_ceo.jpg'),
+      path.join(__dirname, 'public/Mr CEO.jpg'),
+      path.join(__dirname, 'public/mr_ceo.jpg'),
+      path.join(__dirname, 'dist/Mr CEO.jpg'),
+      path.join(__dirname, 'dist/mr_ceo.jpg')
+    ];
+    targets.forEach(target => {
+      const dir = path.dirname(target);
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(target, buffer);
+    });
+    return res.json({ success: true, url: '/Mr%20CEO.jpg' });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: 'Failed to save image' });
+  }
+});
 
 // Container health check endpoint for Cloud Run and monitoring
 app.get('/api/health', (_req, res) => {

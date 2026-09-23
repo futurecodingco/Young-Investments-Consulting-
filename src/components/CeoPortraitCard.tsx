@@ -1,6 +1,11 @@
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { useCeoPhoto } from '../utils/ceoPhotoStorage';
-import { ShieldCheck, Maximize2, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ShieldCheck, Upload, AlertCircle } from 'lucide-react';
+
+// Automatically detect any CEO image in src/assets/images/
+const imageModules = import.meta.glob<{ default: string }>(
+  '../assets/images/*.{jpg,jpeg,png,webp,JPG,JPEG,PNG,WEBP}',
+  { eager: true }
+);
 
 interface CeoPortraitCardProps {
   aspectRatioClass?: string;
@@ -11,152 +16,117 @@ export const CeoPortraitCard: React.FC<CeoPortraitCardProps> = ({
   aspectRatioClass = 'aspect-square',
   maxWidthClass = 'max-w-md'
 }) => {
-  const { photoUrl, saveCustomPhoto } = useCeoPhoto();
-  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [photoSrc, setPhotoSrc] = useState<string | null>(null);
 
-  const processFile = useCallback((file: File) => {
-    if (!file || !file.type.startsWith('image/')) return;
+  useEffect(() => {
+    // 1. Check local storage if previously uploaded in preview
+    const cached = localStorage.getItem('young_investments_ceo_photo');
+    if (cached) {
+      setPhotoSrc(cached);
+      return;
+    }
+
+    // 2. Check detected images in src/assets/images/
+    // Look for Mr CEO, ceo, leslie, young, or any image not being infrastructure/logo
+    const candidates = Object.entries(imageModules);
+    const ceoEntry = candidates.find(([path]) => {
+      const lower = path.toLowerCase();
+      return (
+        lower.includes('mr') ||
+        lower.includes('ceo') ||
+        lower.includes('leslie') ||
+        (!lower.includes('infrastructure') && !lower.includes('logo'))
+      );
+    });
+
+    if (ceoEntry) {
+      setPhotoSrc(ceoEntry[1].default);
+    } else {
+      // 3. Check public static path fallback
+      setPhotoSrc('/Mr%20CEO.jpg');
+    }
+  }, []);
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
     const reader = new FileReader();
     reader.onload = () => {
-      if (reader.result) {
-        saveCustomPhoto(reader.result as string);
-      }
+      const dataUrl = reader.result as string;
+      localStorage.setItem('young_investments_ceo_photo', dataUrl);
+      setPhotoSrc(dataUrl);
+
+      // Save permanently to server in src/assets/images/
+      fetch('/api/upload-ceo-photo', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: dataUrl })
+      }).catch(err => console.error('Upload error:', err));
     };
     reader.readAsDataURL(file);
-  }, [saveCustomPhoto]);
-
-  // Support paste from clipboard
-  useEffect(() => {
-    const handlePaste = (e: ClipboardEvent) => {
-      const items = e.clipboardData?.items;
-      if (!items) return;
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].type.startsWith('image/')) {
-          const file = items[i].getAsFile();
-          if (file) {
-            processFile(file);
-            break;
-          }
-        }
-      }
-    };
-    window.addEventListener('paste', handlePaste);
-    return () => window.removeEventListener('paste', handlePaste);
-  }, [processFile]);
+  };
 
   return (
-    <>
-      <div className={`relative w-full ${maxWidthClass} flex flex-col items-center group`}>
-        {/* Hidden file input for drag/drop or click replacement */}
-        <input
-          ref={fileInputRef}
-          type="file"
-          accept="image/*"
-          className="hidden"
-          onChange={(e) => {
-            const f = e.target.files?.[0];
-            if (f) processFile(f);
-          }}
-        />
+    <div className={`relative w-full ${maxWidthClass} flex flex-col items-center`}>
+      <div
+        className={`relative w-full rounded-2xl overflow-hidden border-2 border-[#c5a059] shadow-[0_15px_35px_rgba(0,0,0,0.85)] ring-2 ring-[#c5a059]/20 ${aspectRatioClass} bg-[#0c121e] flex flex-col items-center justify-center`}
+      >
+        {photoSrc ? (
+          <>
+            {/* The Authentic Photograph of Leslie Flint Young */}
+            <img
+              src={photoSrc}
+              alt="Leslie Flint Young - Chief Executive Officer & Founder, Young Investments Consulting Holdings"
+              className="w-full h-full object-cover object-center"
+              loading="eager"
+              onError={() => {
+                // If the static path failed, fallback to file upload helper
+                setPhotoSrc(null);
+              }}
+            />
 
-        <div
-          onDragOver={(e) => {
-            e.preventDefault();
-            setIsDragging(true);
-          }}
-          onDragLeave={() => setIsDragging(false)}
-          onDrop={(e) => {
-            e.preventDefault();
-            setIsDragging(false);
-            const f = e.dataTransfer.files?.[0];
-            if (f) processFile(f);
-          }}
-          className={`relative w-full rounded-2xl overflow-hidden border-2 transition-all duration-300 ${
-            isDragging
-              ? 'border-emerald-400 ring-4 ring-emerald-400/40 scale-[1.02]'
-              : 'border-[#c5a059] shadow-[0_15px_35px_rgba(0,0,0,0.85)] ring-2 ring-[#c5a059]/20'
-          } ${aspectRatioClass} bg-[#0c121e]`}
-        >
-          {/* Authentic Full-Frame Photograph - Square 1:1 format */}
-          <img
-            src={photoUrl}
-            alt="Leslie Flint Young - Chief Executive Officer & Founder, Young Investments Consulting Holdings"
-            className="w-full h-full object-cover object-center cursor-pointer transition-transform duration-700 group-hover:scale-[1.02]"
-            onClick={() => setIsLightboxOpen(true)}
-            loading="eager"
-          />
+            {/* Ambient Dark Gradient for Legibility */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/15 to-transparent pointer-events-none" />
 
-          {/* Expand Lightbox Button */}
-          <button
-            onClick={() => setIsLightboxOpen(true)}
-            title="View Full Resolution Photo"
-            className="absolute top-3 right-3 p-2 rounded-full bg-black/60 hover:bg-black/80 text-white/80 hover:text-white backdrop-blur-md border border-white/20 transition-all opacity-0 group-hover:opacity-100 cursor-pointer z-20"
-          >
-            <Maximize2 className="w-3.5 h-3.5" />
-          </button>
-
-          {/* Dark Bottom Vignette for statutory title visibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent pointer-events-none" />
-
-          {/* CIPC Statutory Registration Badge */}
-          <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-950/85 backdrop-blur-md border border-[#c5a059]/40 text-[9px] font-mono text-[#c5a059] pointer-events-none z-10">
-            <ShieldCheck className="w-3 h-3 text-emerald-400" />
-            <span>CIPC Registered Director</span>
-          </div>
-
-          {/* Executive Identification Bottom Tag */}
-          <div className="absolute bottom-3.5 left-3.5 right-3.5 text-left pointer-events-none z-10">
-            <div className="text-[10px] font-mono uppercase tracking-wider text-[#c5a059]">
-              Chief Executive Officer &amp; Founder
-            </div>
-            <div className="text-xl font-display font-bold text-white leading-tight">
-              Leslie Flint Young
-            </div>
-            <div className="text-[11px] text-slate-300 mt-0.5">
-              Pretoria, Gauteng, South Africa
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Full-Screen Lightbox Modal for Uncropped Full-Resolution View */}
-      {isLightboxOpen && (
-        <div
-          onClick={() => setIsLightboxOpen(false)}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative max-w-2xl w-full max-h-[90vh] flex flex-col items-center"
-          >
-            <button
-              onClick={() => setIsLightboxOpen(false)}
-              className="absolute -top-12 right-0 p-2 text-slate-400 hover:text-white cursor-pointer"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            <div className="rounded-2xl overflow-hidden border-2 border-[#c5a059] shadow-2xl bg-black">
-              <img
-                src={photoUrl}
-                alt="Leslie Flint Young - Full Photo"
-                className="max-h-[80vh] w-auto object-contain"
-              />
+            {/* CIPC Statutory Registration Badge */}
+            <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-slate-950/85 backdrop-blur-md border border-[#c5a059]/40 text-[9px] font-mono text-[#c5a059] pointer-events-none z-10">
+              <ShieldCheck className="w-3 h-3 text-emerald-400" />
+              <span>CIPC Registered Director</span>
             </div>
 
-            <div className="mt-3 text-center">
-              <div className="text-sm font-display font-bold text-white">
+            {/* Executive Identification Bottom Tag */}
+            <div className="absolute bottom-3.5 left-3.5 right-3.5 text-left pointer-events-none z-10">
+              <div className="text-[10px] font-mono uppercase tracking-wider text-[#c5a059]">
+                Chief Executive Officer &amp; Founder
+              </div>
+              <div className="text-xl font-display font-bold text-white leading-tight">
                 Leslie Flint Young
               </div>
-              <div className="text-xs text-[#c5a059] font-mono">
-                Director &amp; Chief Executive Officer — Young Investments Consulting Holdings
+              <div className="text-[11px] text-slate-300 mt-0.5">
+                Pretoria, Gauteng, South Africa
               </div>
             </div>
-          </div>
-        </div>
-      )}
-    </>
+          </>
+        ) : (
+          /* One-click upload if file is not yet in directory */
+          <label className="w-full h-full p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-slate-900/50 transition-colors">
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleFileUpload}
+            />
+            <div className="w-14 h-14 rounded-full border border-[#c5a059]/50 bg-[#0c1322] flex items-center justify-center mb-3">
+              <Upload className="w-6 h-6 text-[#c5a059]" />
+            </div>
+            <div className="text-sm font-bold text-white">Click to add Mr CEO.jpg</div>
+            <div className="text-[11px] text-slate-400 mt-1 max-w-xs">
+              Select your "Mr CEO.jpg" file to display it immediately on the site.
+            </div>
+          </label>
+        )}
+      </div>
+    </div>
   );
 };
