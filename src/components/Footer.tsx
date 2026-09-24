@@ -24,7 +24,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLogoModal }) =
           <div className="lg:col-span-5 space-y-4">
             <Logo variant="horizontal" size="md" onClick={() => onNavigate('home')} />
             <p className="text-slate-400 text-xs leading-relaxed max-w-sm pt-2">
-              Young Investments Consulting Holdings (Pty) Ltd operates as a high-tier multi-sector holding entity and institutional advisory partner specializing in B2B supply chain engineering, multi-million-rand project finance sourcing, property development, and industrial commodity trading (Oil & Gas).
+              Young Investments Consulting Holdings (Pty) Ltd operates as a high-tier multi-sector holding entity and institutional advisory partner specializing in B2B supply chain engineering, project finance sourcing scaling to R92.5 Billion ZAR ($5.0B USD), property development, and industrial commodity trading (Oil & Gas).
             </p>
             
             <div className="pt-2 flex flex-wrap items-center gap-3">
@@ -182,6 +182,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLogoModal }) =
             <span className="font-mono">Enterprise No: {COMPANY_DATA.enterpriseNumber}</span>
             <span className="hidden sm:inline">•</span>
             <span className="font-mono">VAT No: {COMPANY_DATA.vatNumber}</span>
+            <span className="hidden sm:inline">•</span>
+            <span className="font-mono text-[#c5a059]">Pipeline: R92.5B ZAR ($5B USD)</span>
+            <span className="hidden sm:inline">•</span>
+            <span className="text-emerald-400">Legal City &amp; CIPC Verified</span>
           </div>
 
           <div className="text-slate-400">

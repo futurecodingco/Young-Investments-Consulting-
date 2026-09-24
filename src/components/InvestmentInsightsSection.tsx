@@ -32,6 +32,15 @@ export const InvestmentInsightsSection: React.FC<InvestmentInsightsSectionProps>
   const [selectedInsight, setSelectedInsight] = useState<InvestmentInsight | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
+  React.useEffect(() => {
+    if (!selectedInsight) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setSelectedInsight(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedInsight]);
+
   const categories: FilterCategory[] = [
     'All',
     'Project Finance & Debt',

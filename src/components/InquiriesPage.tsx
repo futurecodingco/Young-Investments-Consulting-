@@ -243,12 +243,12 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
                       <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
                         Targeted Financial Scale / Capital Requirement <span className="text-[#c5a059]">*</span>
                       </label>
-                      <div className="grid grid-cols-3 gap-2">
-                        {['R5M – R20M', 'R20M – R100M', 'R100M+'].map((scaleOption) => (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                        {['R5M – R20M', 'R20M – R100M', 'R100M – R1B', 'R1B – R10B', 'R10B – R92.5B+ (~$5B USD)'].map((scaleOption) => (
                           <button
                             type="button"
                             key={scaleOption}
-                            onClick={() => setFormData({ ...formData, targetedFinancialScale: scaleOption })}
+                            onClick={() => setFormData({ ...formData, targetedFinancialScale: scaleOption as any })}
                             className={`py-2.5 px-2 rounded-lg text-xs font-semibold border text-center transition-all cursor-pointer ${
                               formData.targetedFinancialScale === scaleOption
                                 ? 'bg-[#c5a059] text-slate-950 border-[#c5a059] font-bold shadow'
@@ -492,12 +492,20 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
             {/* Entity Verification Badges */}
             <div className="p-5 rounded-xl bg-slate-900/60 border border-slate-800/80 text-xs text-slate-400 space-y-2">
               <div className="flex items-center justify-between">
+                <span>Total Sourcing Scope:</span>
+                <span className="font-mono text-[#c5a059] font-bold">R92.5B ZAR ($5.0B USD)</span>
+              </div>
+              <div className="flex items-center justify-between">
                 <span>CIPC Registration:</span>
                 <span className="font-mono text-slate-200">{COMPANY_DATA.enterpriseNumber}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>SARS VAT Number:</span>
                 <span className="font-mono text-slate-200">{COMPANY_DATA.vatNumber}</span>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>Legal Verification:</span>
+                <span className="font-mono text-emerald-400 font-semibold">Legal City &amp; CIPC Validated</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>Registry Health Rating:</span>

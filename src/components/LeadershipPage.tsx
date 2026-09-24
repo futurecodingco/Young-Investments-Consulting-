@@ -254,7 +254,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
               Executive Statement from the CEO
             </span>
             <blockquote className="text-base sm:text-lg text-slate-200 font-light italic leading-relaxed">
-              "In high-capital markets across Southern Africa, true value is not created in spreadsheets alone—it is forged on the ground through verified supply chains, ironclad contractual governance, and unyielding fiduciary discipline. Whether structuring a fifty-million-rand project debt facility or delivering twenty million litres of fuel to a remote mining site, our word and our governance are non-negotiable."
+              "In high-capital markets across Southern Africa, true value is not created in spreadsheets alone—it is forged on the ground through verified supply chains, ironclad contractual governance, and unyielding fiduciary discipline. Whether structuring multi-million to multi-billion rand project debt facilities across our R92.5 Billion ZAR ($5B USD) sourcing pipeline or delivering twenty million litres of fuel to a remote mining site, our word and our governance are non-negotiable."
             </blockquote>
             <div className="pt-2 flex items-center justify-between flex-wrap gap-4 border-t border-slate-800/80">
               <div>

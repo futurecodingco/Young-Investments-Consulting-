@@ -35,7 +35,7 @@ export interface IntakeSubmission {
   contactEmail: string;
   contactPhone: string;
   operationalRequirement: 'Project Capital Sourcing' | 'Bulk Commodity Sourcing' | 'Supply Chain Optimization' | 'Infrastructure Development';
-  targetedFinancialScale: 'R5M – R20M' | 'R20M – R100M' | 'R100M+';
+  targetedFinancialScale: 'R5M – R20M' | 'R20M – R100M' | 'R100M – R1B' | 'R1B – R10B' | 'R10B – R92.5B+ (~$5B USD)';
   projectLocation: string;
   projectOverview: string;
   ndaRequired: boolean;
@@ -56,6 +56,9 @@ export interface CompanyRegistry {
   primaryOfficer: string;
   officerRole: string;
   headquarters: string;
+  totalTransactionVolume?: string;
+  totalFacilitationZAR?: string;
+  totalFacilitationUSD?: string;
 }
 
 export interface InvestmentInsight {

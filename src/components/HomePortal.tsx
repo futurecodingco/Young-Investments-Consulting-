@@ -125,6 +125,11 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
 
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5">
+              <span className="text-[#c5a059] font-semibold">Total Sourcing & Capital Scope:</span>
+              <span className="text-[#c5a059] font-bold">R92.5 Billion ZAR ($5.0B USD)</span>
+            </span>
+            <span className="text-slate-700">•</span>
+            <span className="flex items-center gap-1.5">
               <span className="text-slate-300 font-semibold">Low-Sulphur Diesel 50ppm:</span>
               <span className="text-emerald-400 font-bold">$645.00/MT (CIF Durban)</span>
             </span>
@@ -134,19 +139,9 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
               <span className="text-emerald-400 font-bold">$78.80/bbl (Ex-Tank)</span>
             </span>
             <span className="text-slate-700">•</span>
-            <span className="flex items-center gap-1.5">
-              <span className="text-slate-300 font-semibold">Project Debt Facility Range:</span>
-              <span className="text-[#c5a059] font-bold">R5,000,000 – R100,000,000+</span>
-            </span>
-            <span className="text-slate-700">•</span>
-            <span className="flex items-center gap-1.5">
-              <span className="text-slate-300 font-semibold">USD / ZAR Reference:</span>
-              <span className="text-slate-200">18.15</span>
-            </span>
-            <span className="text-slate-700">•</span>
             <span className="flex items-center gap-1.5 text-emerald-400">
               <ShieldCheck className="w-3 h-3" />
-              <span>CIPC Registry: Active (K2020170638)</span>
+              <span>CIPC & Legal City Verified (Active K2020170638)</span>
             </span>
           </div>
         </div>
@@ -224,8 +219,8 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
                   <div className="text-xs text-slate-400 mt-0.5">Bulk Commodity Scope</div>
                 </div>
                 <div>
-                  <div className="text-xl sm:text-2xl font-display font-bold text-white">R5M – R100M+</div>
-                  <div className="text-xs text-slate-400 mt-0.5">Capital Structuring</div>
+                  <div className="text-xl sm:text-2xl font-display font-bold text-[#c5a059] font-mono">R92.5B ZAR</div>
+                  <div className="text-xs text-slate-400 mt-0.5">Total Pipeline Scope ($5B USD)</div>
                 </div>
                 <div>
                   <div className="text-xl sm:text-2xl font-display font-bold text-emerald-400 font-mono">83 / 100</div>
@@ -293,9 +288,22 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
                   </div>
 
                   <div className="p-3 rounded-lg bg-[#c5a059]/10 border border-[#c5a059]/30">
-                    <div className="text-[11px] font-semibold text-[#c5a059]">Executive Leadership</div>
-                    <div className="text-white font-medium">{CEO_BIO.name}</div>
-                    <div className="text-[11px] text-slate-300">Ex-SAA Strategy Sourcing • Ex-ACSA Senior Buyer</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[11px] font-semibold text-[#c5a059]">Total Sourcing Pipeline</span>
+                      <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30">$5.0B USD</span>
+                    </div>
+                    <div className="text-white font-mono font-bold text-sm mt-0.5">R92.5 Billion ZAR</div>
+                    <div className="text-[11px] text-slate-300">Executive Sourcing & Institutional Facilitation</div>
+                  </div>
+
+                  <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800 space-y-1">
+                    <div className="flex items-center justify-between text-[11px]">
+                      <span className="text-slate-400 uppercase font-semibold text-[10px]">Statutory Verification</span>
+                      <span className="text-emerald-400 font-medium">Legal City / CIPC</span>
+                    </div>
+                    <div className="text-[11px] text-slate-300">
+                      CIPC Registered • Deeds Office Real-Time Validated • TransUnion & XDS Credit Bureaus
+                    </div>
                   </div>
 
                   <button
@@ -303,7 +311,7 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
                     onClick={() => onNavigate('governance')}
                     className="w-full py-2.5 px-3 flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white bg-slate-800/80 hover:bg-slate-700/80 rounded-lg transition-colors cursor-pointer"
                   >
-                    <span>View Official CIPC Registry Dossier</span>
+                    <span>View Official Legal City & CIPC Dossier</span>
                     <ChevronRight className="w-3.5 h-3.5 text-[#c5a059]" />
                   </button>
                 </div>
@@ -576,7 +584,11 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
                 </blockquote>
 
                 {/* Pedigree Tags */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
+                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2 text-xs">
+                  <div className="p-3 rounded-lg bg-[#c5a059]/15 border border-[#c5a059]/40">
+                    <span className="text-[#c5a059] font-bold block font-mono">R92.5B ZAR</span>
+                    <span className="text-white text-[11px] font-medium">Pipeline Scope ($5B USD)</span>
+                  </div>
                   <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800">
                     <span className="text-[#c5a059] font-bold block">Former Strategy Sourcing</span>
                     <span className="text-slate-300 text-[11px]">South African Airways (SAA)</span>
@@ -587,7 +599,7 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
                   </div>
                   <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800">
                     <span className="text-[#c5a059] font-bold block">Former Contracts Manager</span>
-                    <span className="text-slate-300 text-[11px]">LMT Products / Denel Dynamics</span>
+                    <span className="text-slate-300 text-[11px]">LMT / Denel Dynamics</span>
                   </div>
                 </div>
 

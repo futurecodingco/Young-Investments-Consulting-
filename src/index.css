@@ -12,9 +12,35 @@
     overflow-x: hidden;
   }
 
+  ::selection {
+    background-color: rgba(197, 160, 89, 0.35);
+    color: #ffffff;
+  }
+
   h1, h2, h3, .font-display {
     font-family: 'Cinzel', Georgia, serif;
     letter-spacing: 0.015em;
+  }
+}
+
+/* Print Stylesheet for Statutory Dossier */
+@media print {
+  header, footer, nav, button, .no-print {
+    display: none !important;
+  }
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+  }
+  .print-page {
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    border-color: #cccccc !important;
   }
 }
 

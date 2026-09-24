@@ -13,7 +13,48 @@ export const COMPANY_DATA: CompanyRegistry = {
   mailingAddress: "482 Farm Road, Unit 52 Sharne Mews, Die Wilgers, Pretoria, Gauteng, 0081, South Africa",
   primaryOfficer: "Leslie Flint Young",
   officerRole: "Director & Chief Executive Officer",
-  headquarters: "Pretoria, Gauteng, South Africa"
+  headquarters: "Pretoria, Gauteng, South Africa",
+  totalTransactionVolume: "R92.5 Billion ZAR ($5.0 Billion USD)",
+  totalFacilitationZAR: "R92,500,000,000 ZAR",
+  totalFacilitationUSD: "$5,000,000,000 USD"
+};
+
+export const STATUTORY_SERVICES_DATA = {
+  portalName: "Legal City",
+  tagline: "Your Online LEGAL Partner",
+  accreditations: [
+    { name: "CIPC", label: "Companies and Intellectual Property Commission", role: "Statutory Company Registry & Director Authentication" },
+    { name: "Registrar of Deeds", label: "Deeds Office South Africa", role: "Online Real-Time Property & Servitude Verification" },
+    { name: "TransUnion", label: "TransUnion Approved Partner", role: "Consumer & Enterprise Credit Bureaus" },
+    { name: "XDS", label: "Xpert Decision Systems", role: "National Credit Bureau Data Verification" },
+    { name: "NCR", label: "National Credit Regulator", role: "Statutory Credit Lending Compliance" }
+  ],
+  services: [
+    {
+      title: "Company Searches (CIPC)",
+      description: "Direct real-time statutory records search of the South African Companies & Intellectual Property Commission (CIPC), verifying active status, director registry, and annual return filings."
+    },
+    {
+      title: "Deed Searches (Deeds Office)",
+      description: "Online real-time access to the records of the South African Registrar of Deeds (Deeds Office), validating commercial property ownership, municipal servitudes, and mineral rights."
+    },
+    {
+      title: "Consumer & Director Tracing",
+      description: "Statutory tracing and counterparty validation by South African ID number, corporate registration, director profile, and authenticated contact vectors."
+    },
+    {
+      title: "Credit Enquiries (TransUnion & XDS)",
+      description: "Certified commercial and consumer credit risk profiles through TransUnion Approved Partner and XDS Credit Bureaus, establishing risk indices for high-volume transactions."
+    },
+    {
+      title: "Verification Services (ID & DHA)",
+      description: "Real-time access to South African ID verification, Department of Home Affairs (DHA) authentication, and consumer/director KYC tools online."
+    },
+    {
+      title: "Debtor Services & Statutory Compliance",
+      description: "Legislatively compliant collection notifications, formal legal debtor management, and official credit bureau listing workflows under National Credit Regulator (NCR) frameworks."
+    }
+  ]
 };
 
 export const CONTACT_INFO = {
@@ -45,14 +86,14 @@ export const QUAD_PILLARS: QuadPillar[] = [
     title: "Project Funding Sourcing",
     category: "Structured Finance & Capital Advisory",
     summary: "Navigating the complex financial landscape to secure debt, equity, and structured capital for transformational African enterprises.",
-    deepCopy: "We clear the path for large-scale development by auditing project financial viability and matching high-yield infrastructure, mining, agricultural, and real estate initiatives with cross-border investment consortia. Our transaction structures unlock capital tranches from R5M to R100M+ across Southern and Sub-Saharan Africa.",
+    deepCopy: "We clear the path for large-scale development by auditing project financial viability and matching high-yield infrastructure, mining, agricultural, and real estate initiatives with cross-border investment consortia. Our transaction structures unlock capital tranches scaling to R92.5 Billion ZAR (~$5 Billion USD) across Southern and Sub-Saharan Africa.",
     deliverables: [
       "Bankable Feasibility Audits & Project Information Memorandums (PIM)",
       "Cross-Border Sovereign & Private Investment Consortia Syndication",
       "Mezzanine, Preferred Equity & Structured Debt Orchestration",
       "Mining & Green Energy Concession Capital Modeling"
     ],
-    metrics: "R5M – R100M+ Capital Sourcing Tranches",
+    metrics: "Up to R92.5 Billion ZAR (~$5 Billion USD) Sourcing Scope",
     iconName: "TrendingUp"
   },
   {
@@ -109,8 +150,8 @@ export const CEO_BIO = {
   fullBio: "Leslie Flint Young serves as the Chief Executive Officer of Young Investments Consulting Holdings (Pty) Ltd. Over a multi-decade career in high-stakes operational ecosystems, Mr. Young has built a formidable reputation as a master of complex supply chain dynamics and corporate governance.\n\nPrior to establishing the Holdings firm in March 2020, he engineered procurement frameworks for some of South Africa's most critical state-owned enterprises and private corporations. His exceptional career pedigree includes serving as the Strategy Sourcing Specialist for South African Airways (SAA), operating as a Senior Buyer for the Airports Company South Africa (ACSA), and serving as Contracts Manager at LMT Products / Denel Dynamics. He also held prominent management seats as Chief Executive of Revelations Isambulo Holdings and Managing Director of the Young Foundation South Africa.\n\nArmed with cross-functional technical expertise spanning 12 distinct commodity categories, import/export compliance, bonded warehousing, and regional freight logistics, Mr. Young acts as a critical link between global capital providers and major developmental projects.",
   coreStats: [
     { label: "Executive Track Record", value: "20+ Years" },
+    { label: "Total Sourcing & Facilitation Scope", value: "R92.5B ZAR ($5B USD)" },
     { label: "Commodity Sectors Commanded", value: "12 Sectors" },
-    { label: "Project Capital Scope", value: "R5M – R100M+" },
     { label: "Registry Health Score", value: "83 / 100" }
   ]
 };
