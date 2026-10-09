@@ -19,7 +19,8 @@ import {
   FileText,
   Copy,
   ExternalLink,
-  Video
+  Video,
+  Facebook
 } from 'lucide-react';
 
 interface InquiriesPageProps {
@@ -244,7 +245,7 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
                         Targeted Financial Scale / Capital Requirement <span className="text-[#c5a059]">*</span>
                       </label>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-                        {['R5M – R20M', 'R20M – R100M', 'R100M – R1B', 'R1B – R10B', 'R10B – R92.5B+ (~$5B USD)'].map((scaleOption) => (
+                        {['R5M – R20M', 'R20M – R100M', 'R100M – R1B', 'R1B – R10B', 'R10B – R95.5B+ (~$5.2B USD)'].map((scaleOption) => (
                           <button
                             type="button"
                             key={scaleOption}
@@ -462,14 +463,14 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
                 </a>
 
                 <a
-                  href={CONTACT_INFO.metaUrl}
+                  href={CONTACT_INFO.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-between p-3 rounded-xl bg-blue-900/15 border border-blue-800/30 hover:bg-blue-900/25 transition-all text-xs"
+                  className="flex items-center justify-between p-3 rounded-xl bg-[#1877F2]/15 border border-[#1877F2]/30 hover:bg-[#1877F2]/25 transition-all text-xs"
                 >
                   <div className="flex items-center gap-2.5">
-                    <Share2 className="w-4 h-4 text-blue-400" />
-                    <span className="text-white font-medium">Meta Profile ({CONTACT_INFO.metaHandle})</span>
+                    <Facebook className="w-4 h-4 text-[#1877F2]" />
+                    <span className="text-white font-medium">Official Facebook Profile</span>
                   </div>
                   <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
                 </a>
@@ -493,7 +494,7 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
             <div className="p-5 rounded-xl bg-slate-900/60 border border-slate-800/80 text-xs text-slate-400 space-y-2">
               <div className="flex items-center justify-between">
                 <span>Total Sourcing Scope:</span>
-                <span className="font-mono text-[#c5a059] font-bold">R92.5B ZAR ($5.0B USD)</span>
+                <span className="font-mono text-[#c5a059] font-bold">R95.5B ZAR ($5.2B USD)</span>
               </div>
               <div className="flex items-center justify-between">
                 <span>CIPC Registration:</span>

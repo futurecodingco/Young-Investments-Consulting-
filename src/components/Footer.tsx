@@ -2,7 +2,7 @@ import React from 'react';
 import { PageId } from '../types';
 import { COMPANY_DATA, CONTACT_INFO } from '../data';
 import { Logo } from './Logo';
-import { Phone, Mail, MapPin, Linkedin, Share2, Shield, ArrowUp, Sparkles, Building2, Video } from 'lucide-react';
+import { Phone, Mail, MapPin, Linkedin, Facebook, Share2, Shield, ArrowUp, Sparkles, Building2, Video } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -24,7 +24,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLogoModal }) =
           <div className="lg:col-span-5 space-y-4">
             <Logo variant="horizontal" size="md" onClick={() => onNavigate('home')} />
             <p className="text-slate-400 text-xs leading-relaxed max-w-sm pt-2">
-              Young Investments Consulting Holdings (Pty) Ltd operates as a high-tier multi-sector holding entity and institutional advisory partner specializing in B2B supply chain engineering, project finance sourcing scaling to R92.5 Billion ZAR ($5.0B USD), property development, and industrial commodity trading (Oil & Gas).
+              Young Investments &amp; Consulting Holdings (Pty) Ltd operates as a high-tier multi-sector holding entity and institutional advisory partner specializing in B2B supply chain engineering, project finance sourcing scaling to R95.5 Billion ZAR ($5.2B USD), property development, and industrial commodity trading (Oil &amp; Gas).
             </p>
             
             <div className="pt-2 flex flex-wrap items-center gap-3">
@@ -134,15 +134,15 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLogoModal }) =
                 </a>
 
                 <a
-                  id="footer-meta-link"
-                  href={CONTACT_INFO.metaUrl}
+                  id="footer-facebook-link"
+                  href={CONTACT_INFO.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-[#c5a059]/60 hover:text-white transition-all"
-                  title="Meta Profile @leslie.young.7549"
-                  aria-label="Meta Profile @leslie.young.7549"
+                  className="p-2 rounded-lg bg-slate-900 border border-slate-800 hover:border-[#1877F2]/60 hover:text-white transition-all"
+                  title="Official Facebook Profile"
+                  aria-label="Leslie Young on Facebook"
                 >
-                  <Share2 className="w-4 h-4 text-blue-400" />
+                  <Facebook className="w-4 h-4 text-[#1877F2]" />
                 </a>
 
                 <a
@@ -183,7 +183,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenLogoModal }) =
             <span className="hidden sm:inline">•</span>
             <span className="font-mono">VAT No: {COMPANY_DATA.vatNumber}</span>
             <span className="hidden sm:inline">•</span>
-            <span className="font-mono text-[#c5a059]">Pipeline: R92.5B ZAR ($5B USD)</span>
+            <span className="font-mono text-[#c5a059]">Pipeline: R95.5B ZAR ($5.2B USD)</span>
             <span className="hidden sm:inline">•</span>
             <span className="text-emerald-400">Legal City &amp; CIPC Verified</span>
           </div>

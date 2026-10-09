@@ -67,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </span>
             <span className="hidden sm:inline text-slate-700">·</span>
             <span className="hidden lg:inline text-slate-400">
-              Pipeline Scope: <strong className="text-[#c5a059] font-mono">R92.5B ZAR ($5B USD)</strong>
+              Pipeline Scope: <strong className="text-[#c5a059] font-mono">R95.5B ZAR ($5.2B USD)</strong>
             </span>
             <span className="hidden lg:inline text-slate-700">·</span>
             <span className="hidden lg:inline-flex items-center gap-1 text-slate-400">
@@ -108,15 +108,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               size="md"
               onClick={() => handleNav('home')}
             />
-            <button
-              id="open-brand-kit-btn"
-              onClick={onOpenLogoModal}
-              title="View brand identity and download official vector logo"
-              className="hidden xl:inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium text-[#c5a059] hover:text-[#faeec7] border border-[#c5a059]/30 hover:border-[#c5a059]/60 rounded-md transition-all cursor-pointer bg-[#c5a059]/5"
-            >
-              <Sparkles className="w-3 h-3 text-[#c5a059]" />
-              Brand Kit
-            </button>
           </div>
 
           {/* Desktop Nav Items */}
@@ -157,14 +148,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Mobile Menu Trigger */}
           <div className="flex items-center gap-2 lg:hidden">
-            <button
-              id="mobile-logo-btn"
-              onClick={onOpenLogoModal}
-              className="p-2 text-[#c5a059] hover:bg-slate-800/60 rounded-md cursor-pointer"
-              title="Official Logo"
-            >
-              <Sparkles className="w-4 h-4" />
-            </button>
             <button
               id="mobile-menu-toggle-btn"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

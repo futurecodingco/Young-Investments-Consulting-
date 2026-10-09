@@ -44,7 +44,7 @@ export const CeoPortraitCard: React.FC<CeoPortraitCardProps> = ({
         {/* Static CEO Photograph: Fills photo area with rounded corners, loaded immediately */}
         <img
           src={currentSrc}
-          alt="Leslie Flint Young - Chief Executive Officer & Founder, Young Investments Consulting Holdings"
+          alt="Leslie Flint Young - Chief Executive Officer & Founder, Young Investments & Consulting Holdings (Pty) Ltd"
           className="w-full h-full object-cover object-center rounded-2xl transition-opacity duration-300"
           loading="eager"
           onError={handleImageError}

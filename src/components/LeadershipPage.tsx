@@ -18,6 +18,7 @@ import {
   ExternalLink,
   Calendar,
   Share2,
+  Facebook,
   ShieldCheck,
   CheckCircle2,
   Lock,
@@ -117,14 +118,14 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                   Leslie Flint Young
                 </h2>
                 <div className="text-sm font-semibold text-[#c5a059] mt-1">
-                  Chief Executive Officer — Young Investments Consulting Holdings (Pty) Ltd
+                  Chief Executive Officer — Young Investments &amp; Consulting Holdings (Pty) Ltd
                 </div>
               </div>
 
               {/* Verified Exact Copy-Paste Bio Text Block */}
               <div className="prose prose-invert max-w-none text-slate-300 text-sm sm:text-base leading-relaxed space-y-4 font-light">
                 <p>
-                  <strong className="text-white font-medium">Leslie Flint Young</strong> serves as the Chief Executive Officer of Young Investments Consulting Holdings (Pty) Ltd. Over a multi-decade career in high-stakes operational ecosystems, Mr. Young has built a formidable reputation as a master of complex supply chain dynamics and corporate governance.
+                  <strong className="text-white font-medium">Leslie Flint Young</strong> serves as the Chief Executive Officer of Young Investments &amp; Consulting Holdings (Pty) Ltd. Over a multi-decade career in high-stakes operational ecosystems, Mr. Young has built a formidable reputation as a master of complex supply chain dynamics and corporate governance.
                 </p>
                 <p>
                   Prior to establishing the Holdings firm in March 2020, he engineered procurement frameworks for some of South Africa's most critical state-owned enterprises and private corporations. His exceptional career pedigree includes serving as the <span className="text-white font-medium">Strategy Sourcing Specialist for South African Airways (SAA)</span>, operating as a <span className="text-white font-medium">Senior Buyer for the Airports Company South Africa (ACSA)</span>, and serving as <span className="text-white font-medium">Contracts Manager at LMT Products / Denel Dynamics</span>. He also held prominent management seats as Chief Executive of Revelations Isambulo Holdings and Managing Director of the Young Foundation South Africa.
@@ -159,14 +160,15 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                 </a>
 
                 <a
-                  id="ceo-meta-profile-link"
-                  href={CONTACT_INFO.metaUrl}
+                  id="ceo-facebook-profile-link"
+                  href={CONTACT_INFO.facebookUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-blue-900/20 hover:bg-blue-900/30 text-white text-xs font-semibold border border-blue-700/40 transition-colors"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#1877F2]/20 hover:bg-[#1877F2]/30 text-white text-xs font-semibold border border-[#1877F2]/40 transition-colors"
                 >
-                  <Share2 className="w-3.5 h-3.5 text-blue-400" />
-                  <span>Meta Platform Profile ({CONTACT_INFO.metaHandle})</span>
+                  <Facebook className="w-3.5 h-3.5 text-[#1877F2]" />
+                  <span>Official Facebook Profile</span>
+                  <ExternalLink className="w-3 h-3 opacity-70" />
                 </a>
 
                 <a
@@ -248,13 +250,13 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
         </div>
 
         {/* Executive Declaration Quote Card */}
-        <div className="mb-16 p-8 rounded-2xl bg-gradient-to-b from-[#101928] to-[#0a101d] border-l-4 border-l-[#c5a059] border-y border-r border-slate-800 shadow-xl">
+        <div className="mb-16 p-8 rounded-2xl bg-gradient-to-b from-[#101928] to-[#0a101d] border border-[#c5a059]/35 shadow-xl">
           <div className="max-w-4xl space-y-4">
             <span className="text-xs uppercase tracking-widest text-[#c5a059] font-mono font-semibold">
               Executive Statement from the CEO
             </span>
             <blockquote className="text-base sm:text-lg text-slate-200 font-light italic leading-relaxed">
-              "In high-capital markets across Southern Africa, true value is not created in spreadsheets alone—it is forged on the ground through verified supply chains, ironclad contractual governance, and unyielding fiduciary discipline. Whether structuring multi-million to multi-billion rand project debt facilities across our R92.5 Billion ZAR ($5B USD) sourcing pipeline or delivering twenty million litres of fuel to a remote mining site, our word and our governance are non-negotiable."
+              "In high-capital markets across Southern Africa, true value is not created in spreadsheets alone—it is forged on the ground through verified supply chains, ironclad contractual governance, and unyielding fiduciary discipline. Whether structuring multi-million to multi-billion rand project debt facilities across our R95.5 Billion ZAR ($5.2B USD) sourcing pipeline or delivering twenty million litres of fuel to a remote mining site, our word and our governance are non-negotiable."
             </blockquote>
             <div className="pt-2 flex items-center justify-between flex-wrap gap-4 border-t border-slate-800/80">
               <div>
@@ -262,7 +264,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                   Leslie Flint Young
                 </div>
                 <div className="text-xs text-[#c5a059]">
-                  Chief Executive Officer & Founder — Young Investments Consulting Holdings (Pty) Ltd
+                  Chief Executive Officer &amp; Founder — Young Investments &amp; Consulting Holdings (Pty) Ltd
                 </div>
               </div>
               <div className="flex items-center gap-2 text-xs font-mono text-slate-400">

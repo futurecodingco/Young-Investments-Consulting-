@@ -31,7 +31,7 @@ export const CapabilitiesPage: React.FC<CapabilitiesPageProps> = ({
   const [activeCommodity, setActiveCommodity] = useState<CommodityCategory | null>(null);
 
   // Interactive Capital Sourcing Estimator state
-  const [calcScale, setCalcScale] = useState<'R5M – R20M' | 'R20M – R100M' | 'R100M – R1B' | 'R1B – R10B' | 'R10B – R92.5B+ (~$5B USD)'>('R20M – R100M');
+  const [calcScale, setCalcScale] = useState<'R5M – R20M' | 'R20M – R100M' | 'R100M – R1B' | 'R1B – R10B' | 'R10B – R95.5B+ (~$5.2B USD)'>('R20M – R100M');
   const [calcType, setCalcType] = useState<string>('Project Capital Sourcing');
   const [calcAssetClass, setCalcAssetClass] = useState<string>('Energy & Bulk Infrastructure');
 
@@ -79,7 +79,7 @@ export const CapabilitiesPage: React.FC<CapabilitiesPageProps> = ({
                 Capital Structure & Intermediary Funding
               </h2>
               <div className="inline-block font-mono text-xs font-semibold text-emerald-400 px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/20">
-                Targeted Scale: R5M – R100M+
+                Targeted Scale: R5M – R95.5B ($5.2B USD)
               </div>
             </div>
 
@@ -363,7 +363,7 @@ export const CapabilitiesPage: React.FC<CapabilitiesPageProps> = ({
                 Targeted Financial Scale
               </label>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
-                {(['R5M – R20M', 'R20M – R100M', 'R100M – R1B', 'R1B – R10B', 'R10B – R92.5B+ (~$5B USD)'] as const).map((sc) => (
+                {(['R5M – R20M', 'R20M – R100M', 'R100M – R1B', 'R1B – R10B', 'R10B – R95.5B+ (~$5.2B USD)'] as const).map((sc) => (
                   <button
                     key={sc}
                     type="button"

@@ -22,7 +22,8 @@ import {
   Truck,
   MessageSquare,
   Activity,
-  ExternalLink
+  ExternalLink,
+  Facebook
 } from 'lucide-react';
 import africanInfrastructure from '../assets/images/african_infrastructure_1790066130818.jpg';
 import { InvestmentInsightsSection } from './InvestmentInsightsSection';
@@ -126,7 +127,7 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
           <div className="flex items-center gap-6">
             <span className="flex items-center gap-1.5">
               <span className="text-[#c5a059] font-semibold">Total Sourcing & Capital Scope:</span>
-              <span className="text-[#c5a059] font-bold">R92.5 Billion ZAR ($5.0B USD)</span>
+              <span className="text-[#c5a059] font-bold">R95.5 Billion ZAR ($5.2B USD)</span>
             </span>
             <span className="text-slate-700">•</span>
             <span className="flex items-center gap-1.5">
@@ -157,12 +158,12 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Top Institutional Badge */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-[#c5a059]/40 text-xs text-slate-200 mb-6 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-[#c5a059] animate-pulse" />
-            <span className="font-semibold text-[#c5a059]">Pan-African Advisory & Holdings</span>
-            <span className="text-slate-500">•</span>
-            <span className="text-slate-300">Reg. K2020170638</span>
+          {/* Top Institutional Kicker */}
+          <div className="flex flex-wrap items-center gap-2.5 text-xs tracking-wider uppercase mb-6">
+            <span className="w-6 h-[1px] bg-[#c5a059]" />
+            <span className="font-semibold text-[#c5a059]">Young Investments &amp; Consulting Holdings (Pty) Ltd</span>
+            <span className="text-slate-600">·</span>
+            <span className="text-slate-300 font-mono">CIPC Reg. K2020170638</span>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -197,30 +198,21 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
                   <Award className="w-4 h-4 text-[#c5a059]" />
                   <span>Executive Pedigree</span>
                 </button>
-
-                <button
-                  id="hero-logo-btn"
-                  onClick={onOpenLogoModal}
-                  className="inline-flex items-center justify-center gap-2 px-4 py-3.5 text-xs font-semibold text-[#c5a059] bg-[#c5a059]/10 hover:bg-[#c5a059]/20 border border-[#c5a059]/30 rounded-lg transition-all cursor-pointer"
-                >
-                  <Sparkles className="w-3.5 h-3.5" />
-                  <span>Brand Crest & Specs</span>
-                </button>
               </div>
 
               {/* Fast Trust Indicators */}
               <div className="pt-6 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div>
+                  <div className="text-xl sm:text-2xl font-display font-bold text-[#c5a059] font-mono">R5M – R95.5B</div>
+                  <div className="text-xs text-slate-400 mt-0.5">Project Capital Sourcing ($5.2B USD)</div>
+                </div>
+                <div>
                   <div className="text-xl sm:text-2xl font-display font-bold text-white">15+ Years</div>
-                  <div className="text-xs text-slate-400 mt-0.5">Procurement Command</div>
+                  <div className="text-xs text-slate-400 mt-0.5">SOE &amp; Corporate Command</div>
                 </div>
                 <div>
                   <div className="text-xl sm:text-2xl font-display font-bold text-[#c5a059]">12 Sectors</div>
                   <div className="text-xs text-slate-400 mt-0.5">Bulk Commodity Scope</div>
-                </div>
-                <div>
-                  <div className="text-xl sm:text-2xl font-display font-bold text-[#c5a059] font-mono">R92.5B ZAR</div>
-                  <div className="text-xs text-slate-400 mt-0.5">Total Pipeline Scope ($5B USD)</div>
                 </div>
                 <div>
                   <div className="text-xl sm:text-2xl font-display font-bold text-emerald-400 font-mono">83 / 100</div>
@@ -290,9 +282,9 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
                   <div className="p-3 rounded-lg bg-[#c5a059]/10 border border-[#c5a059]/30">
                     <div className="flex items-center justify-between">
                       <span className="text-[11px] font-semibold text-[#c5a059]">Total Sourcing Pipeline</span>
-                      <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30">$5.0B USD</span>
+                      <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/30">$5.2B USD</span>
                     </div>
-                    <div className="text-white font-mono font-bold text-sm mt-0.5">R92.5 Billion ZAR</div>
+                    <div className="text-white font-mono font-bold text-sm mt-0.5">R95.5 Billion ZAR</div>
                     <div className="text-[11px] text-slate-300">Executive Sourcing & Institutional Facilitation</div>
                   </div>
 
@@ -325,8 +317,10 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
       <section className="py-16 md:py-24 bg-[#060a10]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c5a059]/10 border border-[#c5a059]/30 text-xs font-semibold text-[#c5a059] tracking-wider uppercase mb-3">
-              Strategic Advisory Architecture
+            <div className="inline-flex items-center gap-2.5 text-xs font-semibold text-[#c5a059] tracking-widest uppercase mb-3">
+              <span className="w-6 h-[1px] bg-[#c5a059]" />
+              <span>Strategic Advisory Architecture</span>
+              <span className="w-6 h-[1px] bg-[#c5a059]" />
             </div>
             <h2 className="text-3xl sm:text-4xl font-display font-bold text-white tracking-tight">
               The Quad-Pillar Operational Matrix
@@ -436,15 +430,15 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c5a059]/10 border border-[#c5a059]/30 text-xs font-semibold text-[#c5a059] uppercase tracking-wider mb-2">
+              <div className="inline-flex items-center gap-2 text-xs font-semibold text-[#c5a059] uppercase tracking-widest mb-2">
                 <Globe2 className="w-3.5 h-3.5" />
-                Cross-Border Logistics Command
+                <span>Cross-Border Logistics Command</span>
               </div>
               <h2 className="text-2xl sm:text-4xl font-display font-bold text-white tracking-tight">
-                SADC Strategic Trade & Capital Corridors
+                SADC Strategic Trade &amp; Capital Corridors
               </h2>
               <p className="mt-2 text-sm text-slate-400 max-w-2xl">
-                Young Investments coordinates procurement, customs bonding, and capital structuring along the vital supply lines connecting South Africa to regional markets.
+                Young Investments &amp; Consulting Holdings (Pty) Ltd coordinates procurement, customs bonding, and capital structuring along the vital supply lines connecting South Africa to regional markets.
               </p>
             </div>
             <span className="text-xs font-mono text-[#c5a059] self-start md:self-end">
@@ -566,9 +560,9 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
 
               {/* Executive Overview & Credibility Statement */}
               <div className="lg:col-span-8 space-y-5">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c5a059]/10 border border-[#c5a059]/30 text-xs font-semibold text-[#c5a059]">
+                <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#c5a059]">
                   <BadgeCheck className="w-3.5 h-3.5" />
-                  Executive Leadership Spotlight
+                  <span>Executive Leadership Spotlight</span>
                 </div>
 
                 <h2 className="text-2xl sm:text-3xl font-display font-bold text-white">
@@ -576,18 +570,18 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
                 </h2>
 
                 <p className="text-sm text-slate-300 leading-relaxed font-light">
-                  Over a multi-decade career steering procurement frameworks for South Africa's most critical state-owned enterprises, Mr. Young links international capital consortia with large-scale African infrastructure, refinery fuel allocations, and industrial commodity flows.
+                  Over a multi-decade career steering procurement frameworks for South Africa's most critical state-owned enterprises, Mr. Young links international capital consortia with large-scale African infrastructure, refinery fuel allocations, and industrial commodity flows as CEO of <strong className="text-white font-medium">Young Investments &amp; Consulting Holdings (Pty) Ltd</strong>.
                 </p>
 
-                <blockquote className="p-4 rounded-xl bg-slate-900/80 border-l-4 border-l-[#c5a059] border-y border-r border-slate-800/80 text-xs sm:text-sm text-slate-300 italic font-light">
+                <blockquote className="p-4 rounded-xl bg-slate-900/80 border border-[#c5a059]/30 text-xs sm:text-sm text-slate-200 italic font-light">
                   "In high-capital markets across Southern Africa, true value is forged through verified supply chains, ironclad contractual governance, and direct on-the-ground presence."
                 </blockquote>
 
                 {/* Pedigree Tags */}
                 <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2 text-xs">
                   <div className="p-3 rounded-lg bg-[#c5a059]/15 border border-[#c5a059]/40">
-                    <span className="text-[#c5a059] font-bold block font-mono">R92.5B ZAR</span>
-                    <span className="text-white text-[11px] font-medium">Pipeline Scope ($5B USD)</span>
+                    <span className="text-[#c5a059] font-bold block font-mono">R95.5B ZAR</span>
+                    <span className="text-white text-[11px] font-medium">Pipeline Scope ($5.2B USD)</span>
                   </div>
                   <div className="p-3 rounded-lg bg-slate-900/60 border border-slate-800">
                     <span className="text-[#c5a059] font-bold block">Former Strategy Sourcing</span>
@@ -612,6 +606,19 @@ export const HomePortal: React.FC<HomePortalProps> = ({ onNavigate, onOpenLogoMo
                     <span>Read Full Executive Biography</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
+
+                  <a
+                    id="home-ceo-facebook-link"
+                    href={CONTACT_INFO.facebookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#1877F2]/15 hover:bg-[#1877F2]/25 text-white text-xs font-semibold border border-[#1877F2]/40 transition-colors"
+                    title="Leslie Young Official Facebook Profile"
+                  >
+                    <Facebook className="w-3.5 h-3.5 text-[#1877F2]" />
+                    <span>Facebook Profile</span>
+                    <ExternalLink className="w-3 h-3 opacity-70" />
+                  </a>
 
                   <button
                     id="home-contact-ceo-desk"

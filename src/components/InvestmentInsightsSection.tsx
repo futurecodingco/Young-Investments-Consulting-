@@ -239,7 +239,7 @@ export const InvestmentInsightsSection: React.FC<InvestmentInsightsSectionProps>
               Positioning Your Project Capital & Supply Chain Within These SADC Shifts
             </h3>
             <p className="text-xs text-slate-300 max-w-2xl font-light">
-              Young Investments Consulting Holdings leverages verified domestic banking channels, Transnet rail allocation networks, and physical bonded terminal storage to structure bankable projects and direct off-take agreements.
+              Young Investments &amp; Consulting Holdings (Pty) Ltd leverages verified domestic banking channels, Transnet rail allocation networks, and physical bonded terminal storage to structure bankable projects and direct off-take agreements.
             </p>
           </div>
 

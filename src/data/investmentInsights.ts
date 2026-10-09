@@ -8,7 +8,7 @@ export const INVESTMENT_INSIGHTS: InvestmentInsight[] = [
     date: 'February 2026',
     source: 'Afreximbank & African Economic Outlook',
     summary: 'The Africa Infrastructure Financing Facility (AIFF) was launched to mobilize blended sovereign debt and private syndication for priority cross-border transport and energy links. African non-bank domestic capital pools have surpassed $2 trillion, exceeding external development financing for the first time.',
-    strategicImplication: 'Sovereign guarantees and hybrid debt facilities are opening accelerated syndication pathways for corporate capital tranches from R5M to R100M+ across Southern Africa.',
+    strategicImplication: 'Sovereign guarantees and hybrid debt facilities are opening accelerated syndication pathways for corporate capital tranches from R5M to R95.5B across Southern Africa.',
     keyMetric: '$2.0T+ Domestic Capital Pool',
     region: 'Pan-African & SADC',
     highlight: true

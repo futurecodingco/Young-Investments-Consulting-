@@ -1,8 +1,8 @@
 import { CompanyRegistry, QuadPillar, CareerMilestone, CommodityCategory } from './types';
 
 export const COMPANY_DATA: CompanyRegistry = {
-  legalName: "Young Investments Consulting Holdings (Pty) Ltd",
-  tradeName: "Young Investments Consulting Holdings",
+  legalName: "Young Investments & Consulting Holdings (Pty) Ltd",
+  tradeName: "Young Investments & Consulting Holdings",
   enterpriseNumber: "K2020170638",
   incorporationDate: "2020-03-21",
   status: "In Business (Active)",
@@ -14,9 +14,9 @@ export const COMPANY_DATA: CompanyRegistry = {
   primaryOfficer: "Leslie Flint Young",
   officerRole: "Director & Chief Executive Officer",
   headquarters: "Pretoria, Gauteng, South Africa",
-  totalTransactionVolume: "R92.5 Billion ZAR ($5.0 Billion USD)",
-  totalFacilitationZAR: "R92,500,000,000 ZAR",
-  totalFacilitationUSD: "$5,000,000,000 USD"
+  totalTransactionVolume: "R95.5 Billion ZAR ($5.2 Billion USD)",
+  totalFacilitationZAR: "R95,500,000,000 ZAR",
+  totalFacilitationUSD: "$5,200,000,000 USD"
 };
 
 export const STATUTORY_SERVICES_DATA = {
@@ -67,15 +67,16 @@ export const CONTACT_INFO = {
   province: "Gauteng",
   country: "South Africa",
   linkedInUrl: "https://za.linkedin.com/in/leslie-young-91143333",
-  metaHandle: "@leslie.young.7549",
-  metaUrl: "https://facebook.com/leslie.young.7549",
+  facebookUrl: "https://www.facebook.com/share/1DBDw822G1/",
+  metaHandle: "Leslie Young on Facebook",
+  metaUrl: "https://www.facebook.com/share/1DBDw822G1/",
   tiktokHandle: "@leslieyoung385",
   tiktokUrl: "https://www.tiktok.com/@leslieyoung385",
 };
 
 export const HERO_CONTENT = {
   headline: "Bridging Capital, Sourcing Commodities, Securing Logistics Across Africa.",
-  subhead: "Young Investments Consulting Holdings delivers institutional project funding, specialized supply chain engineering, and industrial bulk sourcing to optimize complex corporate ecosystems.",
+  subhead: "Young Investments & Consulting Holdings (Pty) Ltd delivers institutional project funding (R5M – R95.5B ZAR), specialized supply chain engineering, and industrial bulk sourcing to optimize complex corporate ecosystems.",
   primaryCta: "Initiate Corporate Consultation",
   secondaryCta: "Explore Executive Pedigree"
 };
@@ -86,14 +87,14 @@ export const QUAD_PILLARS: QuadPillar[] = [
     title: "Project Funding Sourcing",
     category: "Structured Finance & Capital Advisory",
     summary: "Navigating the complex financial landscape to secure debt, equity, and structured capital for transformational African enterprises.",
-    deepCopy: "We clear the path for large-scale development by auditing project financial viability and matching high-yield infrastructure, mining, agricultural, and real estate initiatives with cross-border investment consortia. Our transaction structures unlock capital tranches scaling to R92.5 Billion ZAR (~$5 Billion USD) across Southern and Sub-Saharan Africa.",
+    deepCopy: "We clear the path for large-scale development by auditing project financial viability and matching high-yield infrastructure, mining, agricultural, and real estate initiatives with cross-border investment consortia. Our transaction structures unlock capital tranches scaling to R95.5 Billion ZAR (~$5.2 Billion USD) across Southern and Sub-Saharan Africa.",
     deliverables: [
       "Bankable Feasibility Audits & Project Information Memorandums (PIM)",
       "Cross-Border Sovereign & Private Investment Consortia Syndication",
       "Mezzanine, Preferred Equity & Structured Debt Orchestration",
       "Mining & Green Energy Concession Capital Modeling"
     ],
-    metrics: "Up to R92.5 Billion ZAR (~$5 Billion USD) Sourcing Scope",
+    metrics: "Up to R95.5 Billion ZAR (~$5.2 Billion USD) Sourcing Scope",
     iconName: "TrendingUp"
   },
   {
@@ -146,11 +147,11 @@ export const QUAD_PILLARS: QuadPillar[] = [
 export const CEO_BIO = {
   name: "Leslie Flint Young",
   title: "Chief Executive Officer & Founder",
-  organization: "Young Investments Consulting Holdings (Pty) Ltd",
-  fullBio: "Leslie Flint Young serves as the Chief Executive Officer of Young Investments Consulting Holdings (Pty) Ltd. Over a multi-decade career in high-stakes operational ecosystems, Mr. Young has built a formidable reputation as a master of complex supply chain dynamics and corporate governance.\n\nPrior to establishing the Holdings firm in March 2020, he engineered procurement frameworks for some of South Africa's most critical state-owned enterprises and private corporations. His exceptional career pedigree includes serving as the Strategy Sourcing Specialist for South African Airways (SAA), operating as a Senior Buyer for the Airports Company South Africa (ACSA), and serving as Contracts Manager at LMT Products / Denel Dynamics. He also held prominent management seats as Chief Executive of Revelations Isambulo Holdings and Managing Director of the Young Foundation South Africa.\n\nArmed with cross-functional technical expertise spanning 12 distinct commodity categories, import/export compliance, bonded warehousing, and regional freight logistics, Mr. Young acts as a critical link between global capital providers and major developmental projects.",
+  organization: "Young Investments & Consulting Holdings (Pty) Ltd",
+  fullBio: "Leslie Flint Young serves as the Chief Executive Officer of Young Investments & Consulting Holdings (Pty) Ltd. Over a multi-decade career in high-stakes operational ecosystems, Mr. Young has built a formidable reputation as a master of complex supply chain dynamics and corporate governance.\n\nPrior to establishing the Holdings firm in March 2020, he engineered procurement frameworks for some of South Africa's most critical state-owned enterprises and private corporations. His exceptional career pedigree includes serving as the Strategy Sourcing Specialist for South African Airways (SAA), operating as a Senior Buyer for the Airports Company South Africa (ACSA), and serving as Contracts Manager at LMT Products / Denel Dynamics. He also held prominent management seats as Chief Executive of Revelations Isambulo Holdings and Managing Director of the Young Foundation South Africa.\n\nArmed with cross-functional technical expertise spanning 12 distinct commodity categories, import/export compliance, bonded warehousing, and regional freight logistics, Mr. Young acts as a critical link between global capital providers and major developmental projects.",
   coreStats: [
     { label: "Executive Track Record", value: "20+ Years" },
-    { label: "Total Sourcing & Facilitation Scope", value: "R92.5B ZAR ($5B USD)" },
+    { label: "Total Sourcing & Facilitation Scope", value: "R95.5B ZAR ($5.2B USD)" },
     { label: "Commodity Sectors Commanded", value: "12 Sectors" },
     { label: "Registry Health Score", value: "83 / 100" }
   ]
@@ -159,7 +160,7 @@ export const CEO_BIO = {
 export const CAREER_MILESTONES: CareerMilestone[] = [
   {
     role: "Founder & Chief Executive Officer",
-    organization: "Young Investments Consulting Holdings (Pty) Ltd",
+    organization: "Young Investments & Consulting Holdings (Pty) Ltd",
     type: "Corporate Holding",
     period: "March 2020 – Present",
     scope: "Pretoria, Gauteng, South Africa (Pan-African Operations)",
@@ -317,7 +318,7 @@ export const TWELVE_COMMODITIES: CommodityCategory[] = [
 ];
 
 export const LINKEDIN_SERVICES = [
-  "Project Capital Sourcing (R5M - R100M+)",
+  "Project Capital Sourcing (R5M – R95.5B)",
   "Financial Advisory & Structuring",
   "Commercial Real Estate & Development",
   "Management & Corporate Consulting",

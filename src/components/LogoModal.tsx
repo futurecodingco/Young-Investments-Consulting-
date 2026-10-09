@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Logo } from './Logo';
-import { X, Download, Copy, Check, ShieldCheck, Palette, FileText, Image as ImageIcon } from 'lucide-react';
-import brandEmblemJpg from '../assets/images/young_investments_logo_1790066155449.jpg';
+import { X, Download, Copy, Check, ShieldCheck, Palette, Image as ImageIcon } from 'lucide-react';
 
 interface LogoModalProps {
   isOpen: boolean;
@@ -36,18 +35,85 @@ export const LogoModal: React.FC<LogoModalProps> = ({ isOpen, onClose }) => {
     setTimeout(() => setCopiedColor(null), 2000);
   };
 
+  // Builds a complete standalone SVG containing the YICH crest + full legal name lockup
+  const getStandaloneLogoSvg = () => {
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" width="1200" height="600" fill="none">
+      <defs>
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#0d1524" />
+          <stop offset="100%" stop-color="#05080f" />
+        </linearGradient>
+        <linearGradient id="goldGrad" x1="10%" y1="0%" x2="90%" y2="100%">
+          <stop offset="0%" stop-color="#fdf3d1" />
+          <stop offset="25%" stop-color="#f4dc95" />
+          <stop offset="55%" stop-color="#c5a059" />
+          <stop offset="85%" stop-color="#9a7428" />
+          <stop offset="100%" stop-color="#674a12" />
+        </linearGradient>
+        <linearGradient id="shieldBg" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#141e30" />
+          <stop offset="60%" stop-color="#0a101d" />
+          <stop offset="100%" stop-color="#05080f" />
+        </linearGradient>
+      </defs>
+      <rect width="1200" height="600" fill="url(#bgGrad)" />
+      <rect x="24" y="24" width="1152" height="552" rx="16" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-opacity="0.4" />
+      <g transform="translate(490, 75) scale(1.85)">
+        <path d="M60 5 L106 28 L106 80 L60 115 L14 80 L14 28 Z" fill="url(#shieldBg)" stroke="url(#goldGrad)" stroke-width="2.8" stroke-linejoin="round" />
+        <path d="M60 12 L99 32 L99 76 L60 107 L21 76 L21 32 Z" fill="none" stroke="url(#goldGrad)" stroke-width="1" opacity="0.7" />
+        <circle cx="60" cy="57" r="34" fill="none" stroke="url(#goldGrad)" stroke-width="0.75" stroke-dasharray="2.5 2.5" opacity="0.55" />
+        <rect x="33" y="34" width="5.5" height="44" rx="1" fill="url(#goldGrad)" opacity="0.85" />
+        <rect x="81.5" y="34" width="5.5" height="44" rx="1" fill="url(#goldGrad)" opacity="0.85" />
+        <rect x="33" y="55" width="54" height="4.2" rx="1" fill="url(#goldGrad)" opacity="0.9" />
+        <path d="M36 28 L55.5 54 L55.5 84 L64.5 84 L64.5 54 L84 28 L73.5 28 L60 46.5 L46.5 28 Z" fill="url(#goldGrad)" />
+        <polygon points="60,21 64.5,30 60,39 55.5,30" fill="#ffffff" opacity="0.95" />
+        <rect x="46" y="84" width="28" height="3.2" rx="1" fill="url(#goldGrad)" />
+        <rect x="51" y="89" width="18" height="2.5" rx="1" fill="url(#goldGrad)" opacity="0.85" />
+        <text x="60" y="101" text-anchor="middle" fill="#f4dc95" font-size="6.5" font-weight="700" font-family="Cinzel, Georgia, serif" letter-spacing="2.2">Y·I·C·H</text>
+      </g>
+      <text x="600" y="370" text-anchor="middle" fill="#ffffff" font-size="40" font-weight="700" font-family="Cinzel, Georgia, serif" letter-spacing="7">YOUNG INVESTMENTS</text>
+      <text x="600" y="418" text-anchor="middle" fill="#c5a059" font-size="24" font-weight="600" font-family="Cinzel, Georgia, serif" letter-spacing="6">&amp; CONSULTING HOLDINGS (PTY) LTD</text>
+      <line x1="380" y1="450" x2="820" y2="450" stroke="#c5a059" stroke-width="1" stroke-opacity="0.45" />
+      <text x="600" y="482" text-anchor="middle" fill="#94a3b8" font-size="15" font-weight="500" font-family="Plus Jakarta Sans, Arial, sans-serif" letter-spacing="4">PRETORIA, SOUTH AFRICA • CIPC REG. K2020170638</text>
+    </svg>`;
+  };
+
   const handleDownloadSvg = () => {
-    const svgElement = document.querySelector('#brand-logo-modal-svg svg');
-    if (!svgElement) return;
-    const svgData = new XMLSerializer().serializeToString(svgElement);
+    const svgData = getStandaloneLogoSvg();
     const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
     const svgUrl = URL.createObjectURL(svgBlob);
     const downloadLink = document.createElement('a');
     downloadLink.href = svgUrl;
-    downloadLink.download = 'Young_Investments_Consulting_Holdings_Logo.svg';
+    downloadLink.download = 'Young_Investments_And_Consulting_Holdings_Pty_Ltd_Logo.svg';
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
+    URL.revokeObjectURL(svgUrl);
+  };
+
+  const handleDownloadHighResPng = () => {
+    const svgData = getStandaloneLogoSvg();
+    const img = new Image();
+    const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(svgBlob);
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 2400;
+      canvas.height = 1200;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(img, 0, 0, 2400, 1200);
+        const pngUrl = canvas.toDataURL('image/png');
+        const downloadLink = document.createElement('a');
+        downloadLink.href = pngUrl;
+        downloadLink.download = 'Young_Investments_And_Consulting_Holdings_Pty_Ltd_Logo.png';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+      }
+      URL.revokeObjectURL(url);
+    };
+    img.src = url;
   };
 
   return (
@@ -65,16 +131,16 @@ export const LogoModal: React.FC<LogoModalProps> = ({ isOpen, onClose }) => {
           <div>
             <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#c5a059]">
               <ShieldCheck className="w-4 h-4 text-[#c5a059]" />
-              Official Corporate Brand Identity
+              Official Corporate Identity
             </div>
-            <h2 className="text-xl sm:text-2xl font-display font-bold text-white mt-1">
-              Young Investments Consulting Holdings
+            <h2 className="text-lg sm:text-xl font-display font-bold text-white mt-1">
+              Young Investments &amp; Consulting Holdings (Pty) Ltd
             </h2>
           </div>
           <button
             id="close-logo-modal-btn"
             onClick={onClose}
-            className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800/60 transition-colors"
+            className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800/60 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -86,7 +152,7 @@ export const LogoModal: React.FC<LogoModalProps> = ({ isOpen, onClose }) => {
             <Logo variant="vertical" size="xl" />
           </div>
           <p className="text-xs text-slate-400 max-w-md mt-4 leading-relaxed">
-            The insignia features an interlocking geometric diamond shield representing sovereign stability, the letter "Y" for Young Holdings, and a central celestial diamond compass symbolizing cross-border capital navigation and pan-African supply chain flow.
+            The official <strong className="text-slate-200">Y·I·C·H</strong> institutional insignia unites an interlocking sovereign shield with the <strong className="text-slate-200">Y</strong> &amp; <strong className="text-slate-200">H</strong> architectural monogram for <strong className="text-[#c5a059]">Young Investments &amp; Consulting Holdings (Pty) Ltd</strong> (Private Company, CIPC Reg. K2020170638).
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-3 mt-5">
@@ -99,15 +165,14 @@ export const LogoModal: React.FC<LogoModalProps> = ({ isOpen, onClose }) => {
               Download Official Vector Logo (.SVG)
             </button>
 
-            <a
+            <button
               id="download-raster-crest-btn"
-              href={brandEmblemJpg}
-              download="Young_Investments_Consulting_Holdings_Crest.jpg"
+              onClick={handleDownloadHighResPng}
               className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-[#c5a059]/40 hover:border-[#c5a059] font-semibold text-xs rounded-lg shadow transition-all cursor-pointer"
             >
               <ImageIcon className="w-4 h-4 text-[#c5a059]" />
-              Download High-Res Crest (.JPG)
-            </a>
+              Download High-Res Lockup (.PNG)
+            </button>
           </div>
         </div>
 
@@ -145,10 +210,10 @@ export const LogoModal: React.FC<LogoModalProps> = ({ isOpen, onClose }) => {
         {/* Registration Signature */}
         <div className="mt-6 pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-[11px] text-slate-400">
           <div>
-            Registered in South Africa • Enterprise No: <span className="font-mono text-slate-300">K2020170638</span>
+            Registered Private Company • Enterprise No: <span className="font-mono text-slate-300">K2020170638</span>
           </div>
           <div className="text-[#c5a059]">
-            Pretoria, Gauteng • Founded March 2020
+            Pretoria, Gauteng • Incorporated March 2020
           </div>
         </div>
       </div>

@@ -132,8 +132,8 @@ export const RegistryPage: React.FC<RegistryPageProps> = ({ onNavigate, onOpenLo
 
               <div className="p-4 rounded-xl bg-[#c5a059]/15 border border-[#c5a059]/40">
                 <div className="text-[10px] uppercase font-semibold text-[#c5a059]">Total Sourcing Scale</div>
-                <div className="text-sm font-bold text-white font-mono mt-1">R92.5B ZAR</div>
-                <div className="text-[11px] text-[#c5a059] mt-1">$5.0B USD Equivalent</div>
+                <div className="text-sm font-bold text-white font-mono mt-1">R95.5B ZAR</div>
+                <div className="text-[11px] text-[#c5a059] mt-1">$5.2B USD Equivalent</div>
               </div>
             </div>
 
@@ -207,7 +207,7 @@ export const RegistryPage: React.FC<RegistryPageProps> = ({ onNavigate, onOpenLo
             <div className="p-4 sm:p-5 grid grid-cols-1 sm:grid-cols-3 gap-2 items-center">
               <span className="text-slate-400 font-medium">Total Sourcing &amp; Capital Governance Scope</span>
               <span className="sm:col-span-2 text-emerald-400 font-mono font-bold">
-                R92,500,000,000 ZAR <span className="text-slate-300 font-normal">($5,000,000,000 USD Equivalent)</span>
+                R95,500,000,000 ZAR <span className="text-slate-300 font-normal">($5,200,000,000 USD Equivalent)</span>
               </span>
             </div>
 
@@ -267,7 +267,7 @@ export const RegistryPage: React.FC<RegistryPageProps> = ({ onNavigate, onOpenLo
                 Legal City Statutory Verification Network
               </h2>
               <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
-                Young Investments Consulting Holdings operates with stringent due diligence protocols. Through integration with <strong className="text-white font-medium">Legal City</strong> (South Africa's premier online legal services portal) and direct statutory channels, every transaction, counterparty, land title, and credit exposure scaling up to <strong className="text-[#c5a059] font-medium">R92.5 Billion ZAR ($5B USD)</strong> is verified in real-time.
+                Young Investments &amp; Consulting Holdings (Pty) Ltd operates with stringent due diligence protocols. Through integration with <strong className="text-white font-medium">Legal City</strong> (South Africa's premier online legal services portal) and direct statutory channels, every transaction, counterparty, land title, and credit exposure scaling up to <strong className="text-[#c5a059] font-medium">R95.5 Billion ZAR ($5.2B USD)</strong> is verified in real-time.
               </p>
             </div>
 
@@ -403,7 +403,7 @@ export const RegistryPage: React.FC<RegistryPageProps> = ({ onNavigate, onOpenLo
             <div className="flex items-center gap-2 text-slate-300">
               <ShieldCheck className="w-4 h-4 text-[#c5a059] shrink-0" />
               <span>
-                Statutory due diligence is executed on all transactions across our <strong className="text-white">R92.5 Billion ZAR ($5B USD)</strong> facilitation pipeline.
+                Statutory due diligence is executed on all transactions across our <strong className="text-white">R95.5 Billion ZAR ($5.2B USD)</strong> facilitation pipeline.
               </span>
             </div>
             <div className="text-[11px] font-mono text-slate-400">
