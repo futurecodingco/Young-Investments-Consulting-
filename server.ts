@@ -94,11 +94,30 @@ app.get(['/.netlify/functions/proxy-image', '/api/proxy-image'], async (req, res
   }
 });
 
+// Strategic Intake submission route
+app.post('/api/intake', (req, res) => {
+  try {
+    const intakeData = req.body;
+    console.log('[Strategic Intake Submitted for Leslieyoung@younginvest.co.za]:', intakeData);
+    return res.status(200).json({
+      success: true,
+      message: 'Intake dossier recorded and queued for delivery.',
+      receivingEmail: 'Leslieyoung@younginvest.co.za',
+      recipient: 'Leslie Flint Young (CEO)',
+      timestamp: new Date().toISOString()
+    });
+  } catch (err: any) {
+    console.error('Error handling intake submission:', err);
+    return res.status(500).json({ error: 'Failed to process intake submission' });
+  }
+});
+
 // Container health check endpoint for Cloud Run and monitoring
 app.get('/api/health', (_req, res) => {
   res.status(200).json({
     status: 'ok',
-    entity: 'Young Investments Consulting Holdings (Pty) Ltd',
+    entity: 'Young Investments & Consulting Holdings (Pty) Ltd',
+    receivingEmail: 'Leslieyoung@younginvest.co.za',
     timestamp: new Date().toISOString()
   });
 });

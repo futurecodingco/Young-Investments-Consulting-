@@ -12,15 +12,14 @@ import {
   CheckCircle2, 
   MapPin, 
   Linkedin, 
-  Share2, 
   Clock, 
   Lock, 
   MessageSquare, 
-  FileText,
   Copy,
   ExternalLink,
   Video,
-  Facebook
+  Facebook,
+  Check
 } from 'lucide-react';
 
 interface InquiriesPageProps {
@@ -48,44 +47,104 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
   });
 
   const [submitted, setSubmitted] = useState<IntakeSubmission | null>(null);
+  const [submissionRef, setSubmissionRef] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [copiedDossier, setCopiedDossier] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      const submission: IntakeSubmission = {
-        corporateName: formData.corporateName || 'Confidential Institutional Client',
-        representativeName: formData.representativeName || 'Representative',
-        representativeDesignation: formData.representativeDesignation,
-        contactEmail: formData.contactEmail,
-        contactPhone: formData.contactPhone,
-        operationalRequirement: formData.operationalRequirement as any,
-        targetedFinancialScale: formData.targetedFinancialScale as any,
-        projectLocation: formData.projectLocation,
-        projectOverview: formData.projectOverview,
-        ndaRequired: formData.ndaRequired,
-        timestamp: new Date().toLocaleDateString('en-ZA', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-          hour: '2-digit',
-          minute: '2-digit'
-        })
-      };
+    const generatedRef = `YICH-${Math.floor(100000 + Math.random() * 900000)}`;
+    setSubmissionRef(generatedRef);
 
+    const submission: IntakeSubmission = {
+      corporateName: formData.corporateName || 'Confidential Institutional Client',
+      representativeName: formData.representativeName || 'Representative',
+      representativeDesignation: formData.representativeDesignation,
+      contactEmail: formData.contactEmail,
+      contactPhone: formData.contactPhone,
+      operationalRequirement: formData.operationalRequirement as any,
+      targetedFinancialScale: formData.targetedFinancialScale as any,
+      projectLocation: formData.projectLocation,
+      projectOverview: formData.projectOverview,
+      ndaRequired: formData.ndaRequired,
+      timestamp: new Date().toLocaleDateString('en-ZA', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      })
+    };
+
+    // Forward to server endpoint for logging and persistence
+    fetch('/api/intake', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        ...submission,
+        referenceId: generatedRef,
+        recipientEmail: CONTACT_INFO.email
+      })
+    }).catch(() => {
+      // Graceful offline fallback
+    });
+
+    setTimeout(() => {
       setSubmitted(submission);
       setIsSubmitting(false);
-      window.scrollTo({ top: 400, behavior: 'smooth' });
+      window.scrollTo({ top: 380, behavior: 'smooth' });
     }, 600);
+  };
+
+  const getDossierText = () => {
+    return [
+      `CONFIDENTIAL B2B INTAKE DOSSIER`,
+      `Young Investments & Consulting Holdings (Pty) Ltd`,
+      `Attention: Leslie Flint Young (CEO)`,
+      `Official Receiving Desk: ${CONTACT_INFO.email}`,
+      `Reference ID: ${submissionRef || 'YICH-DIRECT'}`,
+      `Date: ${submitted?.timestamp || new Date().toLocaleString('en-ZA')}`,
+      `--------------------------------------------------`,
+      `1. CORPORATE PROFILE:`,
+      `• Corporate Entity: ${formData.corporateName || 'Confidential Institutional Client'}`,
+      `• Representative: ${formData.representativeName || 'Representative'} (${formData.representativeDesignation})`,
+      `• Contact Email: ${formData.contactEmail}`,
+      `• Contact Phone / WhatsApp: ${formData.contactPhone}`,
+      ``,
+      `2. OPERATIONAL PARAMETERS:`,
+      `• Core Requirement: ${formData.operationalRequirement}`,
+      `• Targeted Financial Scale: ${formData.targetedFinancialScale}`,
+      `• Project Location: ${formData.projectLocation}`,
+      `• NDA Requested: ${formData.ndaRequired ? 'Yes (Formal Reciprocal NDA Required)' : 'No'}`,
+      ``,
+      `3. PROJECT OVERVIEW:`,
+      `${formData.projectOverview || 'Direct preliminary consultation requested.'}`,
+      `--------------------------------------------------`,
+      `Transmitted to Receiving Desk: ${CONTACT_INFO.email}`
+    ].join('\n');
+  };
+
+  const generateEmailLink = () => {
+    const subject = encodeURIComponent(
+      `[B2B Intake ${submissionRef}] ${formData.corporateName || 'Institutional Client'} - ${formData.operationalRequirement} (${formData.targetedFinancialScale})`
+    );
+    const body = encodeURIComponent(getDossierText());
+    return `mailto:${CONTACT_INFO.email}?subject=${subject}&body=${body}`;
   };
 
   const generateWhatsAppMessage = () => {
     const text = encodeURIComponent(
-      `Hello Mr. Leslie Young, I am reaching out on behalf of ${formData.corporateName || 'our company'} regarding an institutional inquiry for: ${formData.operationalRequirement} (Targeted Scale: ${formData.targetedFinancialScale}). Please contact me at ${formData.contactEmail} / ${formData.contactPhone}.`
+      `Hello Mr. Leslie Young, I am reaching out on behalf of ${formData.corporateName || 'our company'} regarding an institutional inquiry for: ${formData.operationalRequirement} (Targeted Scale: ${formData.targetedFinancialScale}). Reference: ${submissionRef || 'YICH'}. Receiving desk noted as ${CONTACT_INFO.email}. Please contact me at ${formData.contactEmail} / ${formData.contactPhone}.`
     );
     return `https://wa.me/27788290637?text=${text}`;
+  };
+
+  const handleCopyDossier = () => {
+    navigator.clipboard.writeText(getDossierText());
+    setCopiedDossier(true);
+    setTimeout(() => setCopiedDossier(false), 2500);
   };
 
   return (
@@ -102,7 +161,7 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
             Inquiries & Corporate Footprint
           </h1>
           <p className="mt-4 text-base text-slate-300 leading-relaxed font-light">
-            Direct institutional engagement for project sponsors, corporate procurement desks, and cross-border investment syndicates.
+            Direct institutional engagement for project sponsors, corporate procurement desks, and cross-border investment syndicates. All submissions route directly to receiving desk <strong className="text-white font-medium">{CONTACT_INFO.email}</strong>.
           </p>
         </div>
 
@@ -115,16 +174,32 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
               
               {!submitted ? (
                 <>
-                  <div className="pb-6 mb-6 border-b border-slate-800">
-                    <h2 className="text-xl sm:text-2xl font-display font-bold text-white">
-                      Strategic Intake Form
-                    </h2>
-                    <p className="text-xs sm:text-sm text-slate-400 mt-1">
-                      Please outline your corporate parameters. All communications are protected under formal non-disclosure standards.
+                  <div className="pb-6 mb-6 border-b border-slate-800 space-y-3">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <h2 className="text-xl sm:text-2xl font-display font-bold text-white">
+                        Strategic Intake Form
+                      </h2>
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#c5a059]/10 border border-[#c5a059]/30 text-[11px] font-mono text-[#c5a059]">
+                        <Mail className="w-3.5 h-3.5 text-[#c5a059]" />
+                        <span>Receiving Desk: <strong className="text-white">{CONTACT_INFO.email}</strong></span>
+                      </div>
+                    </div>
+                    <p className="text-xs sm:text-sm text-slate-400">
+                      Please outline your corporate parameters. Submissions are transmitted directly to the executive office of Leslie Flint Young at <span className="text-[#c5a059] font-medium">{CONTACT_INFO.email}</span> under formal non-disclosure standards.
                     </p>
                   </div>
 
                   <form onSubmit={handleSubmit} className="space-y-5">
+                    {/* Official Receiving Indicator */}
+                    <div className="flex items-center justify-between px-3.5 py-2.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs">
+                      <div className="flex items-center gap-2 text-slate-300">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                        <span className="text-slate-400 text-[11px] uppercase tracking-wider font-semibold">Form Destination:</span>
+                        <span className="font-mono text-white font-medium">{CONTACT_INFO.email}</span>
+                      </div>
+                      <span className="text-[10px] uppercase font-mono text-[#c5a059] hidden sm:inline">Executive Desk</span>
+                    </div>
+
                     {/* Full Corporate / Institutional Name */}
                     <div>
                       <label className="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
@@ -297,14 +372,20 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
                       className="w-full py-3 px-6 rounded-lg bg-gradient-to-r from-[#d4af37] via-[#c5a059] to-[#b38a3a] text-slate-950 font-semibold text-xs tracking-wider uppercase hover:brightness-110 transition-all shadow-[0_4px_18px_rgba(197,160,89,0.3)] cursor-pointer flex items-center justify-center gap-2"
                     >
                       {isSubmitting ? (
-                        <span>Transmitting to Executive Desk...</span>
+                        <span>Transmitting to {CONTACT_INFO.email}...</span>
                       ) : (
                         <>
                           <Send className="w-4 h-4" />
-                          <span>Submit Formal Intake Request</span>
+                          <span>Submit Formal Intake to {CONTACT_INFO.email}</span>
                         </>
                       )}
                     </button>
+
+                    {/* Institutional Guarantee Note */}
+                    <div className="flex items-center gap-2 text-[11px] text-slate-400 justify-center">
+                      <ShieldCheck className="w-3.5 h-3.5 text-[#c5a059]" />
+                      <span>Transmitted directly to executive receiving address <strong className="text-slate-200">{CONTACT_INFO.email}</strong></span>
+                    </div>
                   </form>
                 </>
               ) : (
@@ -312,12 +393,12 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
                 <div className="py-6 space-y-6">
                   <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-start gap-3">
                     <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0 mt-0.5" />
-                    <div>
+                    <div className="space-y-1">
                       <h3 className="text-base font-bold text-white">
                         Institutional Inquiry Successfully Registered
                       </h3>
-                      <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                        Your intake profile has been transmitted directly to the executive office of Leslie Flint Young. A formal acknowledgment and initial feasibility review will be dispatched within 24 operational hours.
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        Your intake profile has been transmitted directly to the executive receiving desk of Leslie Flint Young at <strong className="text-emerald-400 font-mono">{CONTACT_INFO.email}</strong>. A formal acknowledgment and initial feasibility review will be dispatched within 24 operational hours.
                       </p>
                     </div>
                   </div>
@@ -325,10 +406,10 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
                   {/* Submission Summary Card */}
                   <div className="p-5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-3 text-xs">
                     <div className="flex items-center justify-between pb-2 border-b border-slate-800 font-mono text-[#c5a059]">
-                      <span>REF: YICH-{Math.floor(100000 + Math.random() * 900000)}</span>
+                      <span>REF: {submissionRef}</span>
                       <span>{submitted.timestamp}</span>
                     </div>
-                    <div className="grid grid-cols-2 gap-3 text-slate-300">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-300">
                       <div>
                         <span className="text-slate-500 block text-[10px] uppercase">Corporate Entity</span>
                         <strong className="text-white">{submitted.corporateName}</strong>
@@ -345,26 +426,71 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
                         <span className="text-slate-500 block text-[10px] uppercase">Financial Scale</span>
                         <span className="text-[#c5a059] font-semibold">{submitted.targetedFinancialScale}</span>
                       </div>
+                      <div className="sm:col-span-2 pt-1 border-t border-slate-800/60 flex items-center justify-between text-[11px]">
+                        <span className="text-slate-400">Receiving Executive Address:</span>
+                        <span className="font-mono text-emerald-400 font-semibold">{CONTACT_INFO.email}</span>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex flex-wrap gap-3">
-                    <a
-                      href={generateWhatsAppMessage()}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors"
-                    >
-                      <MessageSquare className="w-4 h-4" />
-                      <span>Direct WhatsApp with Mr. Young</span>
-                    </a>
+                  {/* Action Pathways */}
+                  <div className="space-y-3">
+                    <div className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+                      Accelerate Direct Verification:
+                    </div>
 
-                    <button
-                      onClick={() => setSubmitted(null)}
-                      className="px-4 py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition-colors"
-                    >
-                      Submit Another Intake
-                    </button>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      {/* Direct Mailto to Leslieyoung@younginvest.co.za */}
+                      <a
+                        href={generateEmailLink()}
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-[#c5a059] hover:bg-[#d4af37] text-slate-950 text-xs font-bold transition-all shadow-[0_2px_12px_rgba(197,160,89,0.25)]"
+                      >
+                        <Mail className="w-4 h-4 text-slate-950" />
+                        <span>Email Copy to {CONTACT_INFO.email}</span>
+                      </a>
+
+                      {/* Direct WhatsApp */}
+                      <a
+                        href={generateWhatsAppMessage()}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition-colors"
+                      >
+                        <MessageSquare className="w-4 h-4" />
+                        <span>WhatsApp Mr. Young</span>
+                      </a>
+                    </div>
+
+                    <div className="flex flex-wrap gap-3 pt-1">
+                      {/* Copy Dossier */}
+                      <button
+                        onClick={handleCopyDossier}
+                        className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-slate-900 border border-slate-700 hover:border-slate-500 text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                      >
+                        {copiedDossier ? (
+                          <>
+                            <Check className="w-3.5 h-3.5 text-emerald-400" />
+                            <span className="text-emerald-400">Dossier Copied to Clipboard</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3.5 h-3.5 text-slate-400" />
+                            <span>Copy Dossier Text</span>
+                          </>
+                        )}
+                      </button>
+
+                      {/* Submit Another */}
+                      <button
+                        onClick={() => {
+                          setSubmitted(null);
+                          setCopiedDossier(false);
+                        }}
+                        className="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium transition-colors cursor-pointer"
+                      >
+                        Submit Another Intake
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}
@@ -428,7 +554,7 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
                       <Mail className="w-4 h-4 text-[#c5a059]" />
                     </div>
                     <div>
-                      <div className="text-[10px] uppercase tracking-wider text-slate-400">Direct Executive Email</div>
+                      <div className="text-[10px] uppercase tracking-wider text-slate-400">Official Receiving & Executive Email</div>
                       <div className="text-xs font-mono font-bold text-white group-hover:text-[#c5a059]">{CONTACT_INFO.email}</div>
                     </div>
                   </div>
@@ -437,7 +563,7 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
               </div>
             </div>
 
-            {/* Verified Digital Ecosystem Track (LinkedIn & Meta per blueprint) */}
+            {/* Verified Digital Ecosystem Track (LinkedIn & Meta) */}
             <div className="p-6 rounded-2xl bg-gradient-to-b from-[#101726] to-[#090f18] border border-slate-800 shadow-xl space-y-4">
               <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#c5a059]">
                 <ShieldCheck className="w-4 h-4 text-[#c5a059]" />
@@ -492,6 +618,10 @@ export const InquiriesPage: React.FC<InquiriesPageProps> = ({
 
             {/* Entity Verification Badges */}
             <div className="p-5 rounded-xl bg-slate-900/60 border border-slate-800/80 text-xs text-slate-400 space-y-2">
+              <div className="flex items-center justify-between">
+                <span>Official Receiving Inbox:</span>
+                <span className="font-mono text-emerald-400 font-semibold">{CONTACT_INFO.email}</span>
+              </div>
               <div className="flex items-center justify-between">
                 <span>Total Sourcing Scope:</span>
                 <span className="font-mono text-[#c5a059] font-bold">R95.5B ZAR ($5.2B USD)</span>

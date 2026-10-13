@@ -58,7 +58,10 @@ export const STATUTORY_SERVICES_DATA = {
 };
 
 export const CONTACT_INFO = {
-  email: "leslieyoung74@gmail.com",
+  email: "Leslieyoung@younginvest.co.za",
+  receivingEmail: "Leslieyoung@younginvest.co.za",
+  corporateEmail: "Leslieyoung@younginvest.co.za",
+  secondaryEmail: "leslieyoung74@gmail.com",
   phoneDisplay: "078 829 0637",
   phoneRaw: "0788290637",
   internationalPhone: "+27 78 829 0637",

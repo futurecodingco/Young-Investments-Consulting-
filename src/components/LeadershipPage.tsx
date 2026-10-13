@@ -93,7 +93,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                     <Mail className="w-3.5 h-3.5 text-[#c5a059]" />
                     Direct Email:
                   </span>
-                  <a href={`mailto:${CONTACT_INFO.email}`} className="font-mono text-slate-200 hover:text-[#c5a059] truncate max-w-[200px]">
+                  <a href={`mailto:${CONTACT_INFO.email}`} className="font-mono text-slate-200 hover:text-[#c5a059] text-xs transition-colors">
                     {CONTACT_INFO.email}
                   </a>
                 </div>
